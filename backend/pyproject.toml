@@ -1,0 +1,61 @@
+[tool.poetry]
+name = "restaurant costs manager"
+version = "0.1.0"
+description = ""
+authors = ["blazej bielski"]
+readme = "README.md"
+
+[tool.poetry.dependencies]
+python = "^3.12"
+Django = "5.0.7"
+djangorestframework = "3.15.2"
+pytest = "8.3.1"
+pytest-django = "4.8.0"
+pytest-cov = "5.0.0"
+black = "24.4.2"
+flake8 = "7.1.0"
+
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
+
+[tool.pytest.ini_options]
+DJANGO_SETTINGS_MODULE = "config.settings"
+python_files = "test_*.py"
+
+addopts = [
+    "--cov=.",
+    "--cov-config=.coveragerc",
+    "--cov-report",
+    "term-missing:skip-covered",
+    "--cov-fail-under=80"
+]
+
+[tool.pytest.markers]
+slow = "Run slow unit test e.g. for models"
+unit = "Run unit tests"
+smoke = "Run core unit tests"
+dbtest = "Run database tests"
+
+
+[tool.black]
+line-length = 120
+target-version = ['py312']
+exclude = '''
+/(
+    | \.git/  # exclude a directory
+    | \.mypy_cache/  # exclude a directory
+    | \.pytest_cache/  # exclude a directory
+    | .*\.pyi?  # exclude generated files
+    | .*\.json  # exclude metadata files
+    | .*\.md  # exclude documentation
+    | .*\.toml  # exclude configuration files
+    | .*\.yml  # exclude configuration files
+    | .*\.yaml  # exclude configuration files
+    | .*\.txt  # exclude configuration files
+    | .*\.lock  # exclude configuration files
+    | .*\.sh  # exclude configuration files
+    | .*\.log  # exclude configuration files
+)/
+'''
