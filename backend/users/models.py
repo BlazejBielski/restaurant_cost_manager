@@ -1,5 +1,3 @@
-import uuid
-
 from django.contrib.auth.validators import UnicodeUsernameValidator
 from django.db import models
 
@@ -37,16 +35,17 @@ class CustomUserManager(BaseUserManager["CustomUser"]):
 
         return user
 
-    class CustomUser(AbstractUser):
 
-        id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False, unique=True, db_index=True)
-        email = models.EmailField(_("email address"), unique=True)
-        username = models.CharField(_("username"), max_length=150, unique=True, validators=[UnicodeUsernameValidator()])
+class CustomUser(AbstractUser):
 
-        USERNAME_FIELD = "email"
-        REQUIRED_FIELDS = ["email address"]
+    id: models.UUIDField = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False, unique=True, db_index=True)
+    email = models.EmailField(_("email address"), unique=True)
+    username = models.CharField(_("username"), max_length=150, unique=True, validators=[UnicodeUsernameValidator()])
 
-        objects = CustomUserManager()
+    USERNAME_FIELD = "email"
+    REQUIRED_FIELDS = ["email address"]
 
-        def __str__(self):
-            return self.email
+    objects = CustomUserManager()
+
+    def __str__(self):
+        return self.email
