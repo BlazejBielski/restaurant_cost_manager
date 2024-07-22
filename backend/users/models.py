@@ -38,7 +38,7 @@ class CustomUserManager(BaseUserManager["CustomUser"]):
 
 class CustomUser(AbstractUser):
 
-    id: models.UUIDField = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False, unique=True, db_index=True)
+    id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False, unique=True, db_index=True)
     email = models.EmailField(_("email address"), unique=True)
     username = models.CharField(_("username"), max_length=150, unique=True, validators=[UnicodeUsernameValidator()])
 
