@@ -44,7 +44,6 @@ class CustomUser(AbstractUser):
     username = models.CharField(_("username"), max_length=150, unique=True, validators=[UnicodeUsernameValidator()])
 
     USERNAME_FIELD = "email"
-    REQUIRED_FIELDS = ["email address"]
 
     objects = CustomUserManager()
 
