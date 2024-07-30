@@ -13,7 +13,7 @@ class CustomUserManager(BaseUserManager["CustomUser"]):
 
     use_in_migrations = True
 
-    def create_user(self, email, password, username="", **kwargs):
+    def create_user(self, email, password, username, **kwargs):
         if not email:
             raise ValueError("Users must have an email address")
 
@@ -44,6 +44,7 @@ class CustomUser(AbstractUser):
     username = models.CharField(_("username"), max_length=150, unique=True, validators=[UnicodeUsernameValidator()])
 
     USERNAME_FIELD = "email"
+    REQUIRED_FIELDS = ["username"]
 
     objects = CustomUserManager()
 
